@@ -78,7 +78,7 @@ const displayResult = () => {
   });
 };
 
-const reset = document.getElementById("reset");
+const reset = document.querySelector("#reset");
 reset.onclick = () => {
   cell.forEach((element) => {
     element.textContent = "";
@@ -86,4 +86,23 @@ reset.onclick = () => {
   match = "Ongoing";
   count = 1;
   GameboardArray = [];
+};
+
+const playerName = document.querySelector(".playerName");
+playerName.addEventListener("submit", (event) => {
+  event.preventDefault();
+});
+const start = document.getElementById("start");
+start.onclick = () => {
+  const Player1 = document.getElementById("player1");
+  const Player2 = document.getElementById("player2");
+  if (Player1.value == "" || Player2.value == "") {
+    alert("Please fill up the names");
+  } else {
+    playerName.style.display = "None";
+    const container = document.querySelector(".container");
+    container.style.display = "flex";
+    const resetButtonDiv = document.querySelector(".reset");
+    resetButtonDiv.style.display = "flex";
+  }
 };

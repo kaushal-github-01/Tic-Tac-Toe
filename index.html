@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <form class="playerName">
+      <div>
+        <label for="player1">Player 1:</label>
+        <input type="text" id="player1" placeholder="Name Yourself" />
+      </div>
+      <div>
+        <label for="player2">Player 2:</label>
+        <input type="text" id="player2" placeholder="Name Yourself" />
+      </div>
+      <button type="submit" id="start">Start</button>
+    </form>
+
     <div class="container">
       <div class="cells">
         <div class="cell" id="0"></div>
@@ -20,7 +32,7 @@
         <div class="cell" id="8"></div>
       </div>
     </div>
-    <div class="button">
+    <div class="reset">
       <button id="reset">Reset</button>
     </div>
 
