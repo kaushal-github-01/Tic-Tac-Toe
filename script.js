@@ -1,13 +1,9 @@
 let match = "Ongoing";
+let count = 1;
+let GameboardArray = [];
 
-const Gameboard = () => {
-  const GameboardArray = [];
-  return GameboardArray;
-};
-
-const Players = (GameboardArray) => {
-  const cell = document.querySelectorAll(".cell");
-  let count = 1;
+const cell = document.querySelectorAll(".cell");
+const Players = () => {
   cell.forEach((element) => {
     element.onclick = () => {
       const Player1 = () => {
@@ -44,14 +40,9 @@ const Players = (GameboardArray) => {
     };
   });
 };
+Players();
 
-const Game = () => {
-  const GameboardArray = Gameboard();
-  Players(GameboardArray);
-};
-Game();
-
-const displayResult = (GameboardArray) => {
+const displayResult = () => {
   winningArray = [
     //row
     [0, 1, 2],
@@ -85,4 +76,14 @@ const displayResult = (GameboardArray) => {
       }
     }
   });
+};
+
+const reset = document.getElementById("reset");
+reset.onclick = () => {
+  cell.forEach((element) => {
+    element.textContent = "";
+  });
+  match = "Ongoing";
+  count = 1;
+  GameboardArray = [];
 };
