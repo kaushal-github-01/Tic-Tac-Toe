@@ -1,54 +1,88 @@
-const cells = document.querySelectorAll(".cell");
-cells.forEach((cell) => {
-  cell.onclick = () => {
-    let position = cell.id - 1;
-    Game.Gameboard.playersFactory(cell, position);
-  };
-});
+let match = "Ongoing";
 
-let count = 1;
+const Gameboard = () => {
+  const GameboardArray = [];
+  return GameboardArray;
+};
 
-const Game = (() => {
-  const Gameboard = (() => {
-    const gameboard = [];
-
-    const playersFactory = (cell, position) => {
-      const player1 = () => {
-        if (cell.innerText == "") {
-          gameboard[position] = "X";
-          cell.innerText = "X";
+const Players = (GameboardArray) => {
+  const cell = document.querySelectorAll(".cell");
+  let count = 1;
+  cell.forEach((element) => {
+    element.onclick = () => {
+      const Player1 = () => {
+        if (element.textContent == "") {
+          element.textContent = "X";
+          GameboardArray[element.id] = "X";
           count++;
+          displayResult(GameboardArray);
         } else {
-          alert("Not empty");
+          alert("Press another block Player 1");
         }
       };
 
-      const player2 = () => {
-        if (cell.innerText == "") {
-          gameboard[position] = "O";
-          cell.innerText = "O";
+      const Player2 = () => {
+        if (element.textContent == "") {
+          element.textContent = "O";
+          GameboardArray[element.id] = "O";
           count++;
+          displayResult(GameboardArray);
         } else {
-          alert("Not empty");
+          alert("Press another block Player 2");
         }
       };
 
-      if (count < 10) {
+      if (match == "Ongoing") {
         if (count % 2 != 0) {
-          player1();
+          Player1();
         } else {
-          player2();
+          Player2();
         }
       } else {
-        alert("Time to find the result");
+        alert("Match is Over");
       }
-
-      console.log(gameboard);
-      return gameboard;
     };
+  });
+};
 
-    return { playersFactory };
-  })();
+const Game = () => {
+  const GameboardArray = Gameboard();
+  Players(GameboardArray);
+};
+Game();
 
-  return { Gameboard };
-})();
+const displayResult = (GameboardArray) => {
+  winningArray = [
+    //row
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    //column
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    //diagonal
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  winningArray.forEach((innerArray) => {
+    // Now, i want it to check
+
+    if (
+      GameboardArray[innerArray[0]] &&
+      GameboardArray[innerArray[1]] &&
+      GameboardArray[innerArray[2]] != ""
+    ) {
+      if (
+        GameboardArray[innerArray[0]] === GameboardArray[innerArray[1]] &&
+        GameboardArray[innerArray[1]] === GameboardArray[innerArray[2]]
+      ) {
+        setTimeout(() => {
+          alert("Match Over");
+          match = "Over";
+        }, 100);
+      }
+    }
+  });
+};
