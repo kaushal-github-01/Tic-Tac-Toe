@@ -1,6 +1,8 @@
 let match = "Ongoing";
 let count = 1;
 let GameboardArray = [];
+const Player1Input = document.getElementById("player1");
+const Player2Input = document.getElementById("player2");
 
 const cell = document.querySelectorAll(".cell");
 const Players = () => {
@@ -13,7 +15,7 @@ const Players = () => {
           count++;
           displayResult(GameboardArray);
         } else {
-          alert("Press another block Player 1");
+          alert("Press another block " + Player1Input.value);
         }
       };
 
@@ -24,7 +26,7 @@ const Players = () => {
           count++;
           displayResult(GameboardArray);
         } else {
-          alert("Press another block Player 2");
+          alert("Press another block " + Player2Input.value);
         }
       };
 
@@ -58,8 +60,6 @@ const displayResult = () => {
   ];
 
   winningArray.forEach((innerArray) => {
-    // Now, i want it to check
-
     if (
       GameboardArray[innerArray[0]] &&
       GameboardArray[innerArray[1]] &&
@@ -70,8 +70,14 @@ const displayResult = () => {
         GameboardArray[innerArray[1]] === GameboardArray[innerArray[2]]
       ) {
         setTimeout(() => {
-          alert("Match Over");
-          match = "Over";
+          // Declare the winner here.
+          if (GameboardArray[innerArray[0]] == "X") {
+            alert(Player1Input.value + " wins !!");
+            match = "Over";
+          } else {
+            alert(Player2Input.value + " wins !!");
+            match = "Over";
+          }
         }, 100);
       }
     }
@@ -94,9 +100,7 @@ playerName.addEventListener("submit", (event) => {
 });
 const start = document.getElementById("start");
 start.onclick = () => {
-  const Player1 = document.getElementById("player1");
-  const Player2 = document.getElementById("player2");
-  if (Player1.value == "" || Player2.value == "") {
+  if (Player1Input.value == "" || Player2Input.value == "") {
     alert("Please fill up the names");
   } else {
     playerName.style.display = "None";
